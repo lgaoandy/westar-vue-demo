@@ -1,0 +1,121 @@
+* {
+    font-size: 14px;
+}
+#demo {
+    width: 100%;
+}
+.container {
+    max-width: 1440px;
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+.map-canvas {
+    position: relative;
+    text-align: right;
+    width: 100%;
+}
+.google-map {
+    overflow: hidden;
+    background: none;
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+    border: solid 8px gainsboro;
+}
+.panel-content{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.panel select, .panel label, .panel input[type="text"] {
+    width: 100%;
+}
+.panel select, panel label{
+    padding: 2px;
+    margin-top: 5px;
+    color: grey;
+    border-color: lightgray;
+    border-radius: 4px;
+}
+.group-unit {
+    display: flex;
+}
+.group-unit label {
+    padding: 5px;
+}
+
+.checkbox-list {
+    margin-top: 15px;
+}
+
+.table {
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid grey;
+    overflow: hidden;
+}
+.table-title {
+    font-weight: 550;
+    background-color: gainsboro;
+}
+.table-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+}
+.table-grid:first-child {
+    border-top: none;
+    border-right: none;
+}
+.table-grid > span {
+    padding: 8px 4px;
+    border-left: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+.table-grid > span:first-child {
+    border-left: none;
+}
+.table-grid:last-of-type > span {
+    border-bottom: none;
+}
+
+.navigation {
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background-color: #5c85d6;
+    color: white;
+    display: grid;
+    grid-template-columns: 2fr 10fr 2fr;
+    padding: 20px 0;
+}
+.nav-body input {
+    border: none;
+    background: none;
+    border-bottom: 1px solid white;
+}
+.nav-body input::placeholder {
+    color: white;
+}
+.nav-switch {
+    display: flex;
+    justify-content: center;
+}
+.nav-switch i {
+    justify-self: center;
+    align-self: center;
+}
+
+.road-data {
+    margin-top: 15px;
+    text-align: left;
+    padding: 15px;
+}
+.data-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.data-grid > span {
+    padding: 4px;
+}

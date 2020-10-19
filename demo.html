@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<script src="https://use.fontawesome.com/bc71f417e3.js"></script>
+
+
+<div id="demo">
+    <div class="container">
+        <div class="panel">
+            <div class="panel-content">
+                <select>
+                    <option>选择车辆编号</option>
+                </select>
+                <div class="group-unit">
+                    <label>团号<input type="text"></label>
+                    <label>出团单号<input type="text"></label>
+                </div>
+                <div>
+                    <div class="table">
+                        <div class="table-grid table-title">
+                            <span>接站点</span>
+                            <span>剩余抵达时间</span>
+                        </div>
+                        <div class="table-grid" v-for="d in destinations">
+                            <span>{{d.name}}</span>
+                            <span>{{d.remaining_time}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <div class="nav-pointer"></div>
+                    <div class="nav-body">
+                        <label><input type="text" placeholder="当前位置"></label>
+                        <label><input type="text" placeholder="目的地位置"></label>
+                    </div>
+                    <div class="nav-switch">
+                        <i class="fas fa-random"></i>
+                    </div>
+                </div>
+                <div class="checkbox-list">
+                    <input type="checkbox" value="">
+                    <label style="width: auto;">景点/上下车点</label><br>
+                    <input type="checkbox" value="">
+                    <label style="width: auto;">接送点</label>
+                </div>
+                <div class="road-data table">
+                    <div class="data-grid">
+                        <span>出发时间</span>
+                        <span>8:00:00</span>
+                        <span>行车时间</span>
+                        <span>5h 30min</span>
+                        <span>行驶公里数</span>
+                        <span>280km</span>
+                        <span>当前时速</span>
+                        <span>90kph</span>
+                        <span>当日</span>
+                        <span>查看</span>
+                        <span>结束时间</span>
+                        <span>-</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="map-canvas">
+            <div class="google-map">
+                <iframe :width="googleWidth" :height="googleHeight" :src="googleSrc" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: demo,
+        data: {
+            hello: 'Hello World',
+            googleSrc: '',
+            googleWidth: 1010,
+            googleHeight: 600,
+            destinations: []
+        },
+        computed: {
+            remainingTime: function(destinations){
+                console.log(dest);
+                if (Number.isInteger(this.destinations.remaining_time)){
+                    return '0:'+this.destinations.remaining_time+':00';
+                }
+            }
+        },
+        created: function(){
+            this.loadGoogleMap();
+            this.loadJson();
+        },
+        methods: {
+            loadGoogleMap: function(){
+                var apiKey = 'AIzaSyBNQg5IDpyilv8MoUT1UCWS1UnEmddlkTw';
+                var googleOrigin = 'Calgary+airport';
+                var googleDestination = 'Westar';
+                var googleWaypoint = 'Hilton+Garden+Inn+Calgary+Airport';
+
+                var googleUrl = 'https://www.google.com/maps/embed/v1/directions?key='+ apiKey +
+                    '&origin='+ googleOrigin +
+                    '&destination='+ googleDestination +
+                    '&waypoints='+googleWaypoint;
+                this.googleSrc = googleUrl;
+            },
+            loadJson: function(){
+                var json = 'demo.json';
+                axios.get(json).then(function(res){
+                    console.log(res.data);
+                    vm.destinations = res.data;
+                });
+            }
+        }
+    })
+</script>
